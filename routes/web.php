@@ -1,7 +1,9 @@
 <?php
 
 use App\Http\Controllers\backend\admin\DashboardController;
+use App\Http\Controllers\backend\admin\DivisionController;
 use App\Http\Controllers\backend\admin\ProfileController;
+use App\Http\Controllers\backend\admin\ZillaController;
 use App\Http\Controllers\backend\AuthenticationController;
 use App\Http\Controllers\backend\operator\DashboardController as OperatorDashboardController;
 use App\Http\Controllers\backend\operator\ProfileController as OperatorProfileController;
@@ -30,6 +32,14 @@ Route::prefix('admin')->group(function () {
             Route::post('profile-password/update', [ProfileController::class, 'profile_password_update'])->name('profile.password.update');
             //dashboard
             Route::get('dashboard', [DashboardController::class, 'dashboard'])->name('dashboard');
+            
+            Route::match(['get', 'post'], 'division', [DivisionController::class, 'division'])->name('division');
+            
+            Route::get('division/delete/{id}', [DivisionController::class, 'division_delete'])->name('division.delete');
+            
+            Route::match(['get', 'post'], 'zilla', [ZillaController::class, 'Zilla'])->name('zilla');
+
+            Route::get('zilla/delete/{id}', [ZillaController::class, 'delete'])->name('zilla.delete');
         });
     });
 });
