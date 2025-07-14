@@ -2,10 +2,12 @@
 
 use App\Http\Controllers\backend\admin\DashboardController;
 use App\Http\Controllers\backend\admin\DivisionController;
+use App\Http\Controllers\backend\admin\LearnerController;
 use App\Http\Controllers\backend\admin\ProfileController;
 use App\Http\Controllers\backend\admin\ZillaController;
 use App\Http\Controllers\backend\AuthenticationController;
 use App\Http\Controllers\backend\operator\DashboardController as OperatorDashboardController;
+use App\Http\Controllers\backend\operator\ImportantLinkController;
 use App\Http\Controllers\backend\operator\ProfileController as OperatorProfileController;
 use App\Http\Controllers\FrontEndController;
 use App\Http\Middleware\AdminAuthenticationMiddleware;
@@ -38,8 +40,13 @@ Route::prefix('admin')->group(function () {
             Route::get('division/delete/{id}', [DivisionController::class, 'division_delete'])->name('division.delete');
             
             Route::match(['get', 'post'], 'zilla', [ZillaController::class, 'Zilla'])->name('zilla');
-
+            
             Route::get('zilla/delete/{id}', [ZillaController::class, 'delete'])->name('zilla.delete');
+
+            Route::match(['get', 'post'], 'link/add', [ImportantLinkController::class, 'important_link_add'])->name('link.add');
+
+           Route::match(['get','post'], 'learner/add', [LearnerController::class, 'learner_add'])->name('learner.add');
+          
         });
     });
 });

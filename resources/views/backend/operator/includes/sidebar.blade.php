@@ -20,6 +20,29 @@
                     <span class="link-title">Dashboard</span>
                 </a>
             </li>
+
+            <li
+                class="nav-item ">
+                <a class="nav-link" data-bs-toggle="collapse" href="#importantLink" role="button" aria-expanded="false"
+                    aria-controls="importantLink">
+                    <i class="fa-regular fa-user"></i>
+                    <span class="link-title">Important Link Manage</span>
+                    <i class="fa-solid fa-chevron-down link-arrow"></i>
+                </a>
+                <div class="collapse" id="importantLink">
+                    <ul class="nav sub-menu">
+                        <li class="nav-item ">
+                            <a href="{{route('operator.link.add')}}"
+                                class="nav-link ">Important Link Add
+                                </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href=""
+                                class="nav-link ">Important Link List</a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
         </ul>
     </div>
 </nav>
