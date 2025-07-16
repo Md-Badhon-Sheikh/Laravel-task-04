@@ -7,7 +7,7 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-body">
-                    <h3 class=" text-center mb-2">Important Link Add</h3>
+                    <h3 class=" text-center mb-2">Learner Add</h3>
                     @if (session('success'))
                     <div style="width:100%" class="alert alert-primary alert-dismissible fade show" role="alert">
                         <strong> Success!</strong> {{ session('success') }}
@@ -21,7 +21,7 @@
                             aria-label="btn-close"></button>
                     </div>
                     @endif
-                    <form action="" method="post" enctype="multipart/form-data">
+                    <form action="{{route('admin.learner.add')}}" method="post" enctype="multipart/form-data">
                         @csrf
                         <div class="row">
                             <div class="col-md-3">
@@ -36,8 +36,8 @@
                             </div>
                             <div class="col-md-3 mb-3">
                                 <label class="form-label" for="">Country *</label>
-                                <input type="text" name="site_link" class="form-control"
-                                    placeholder="Enter Site Link" required>
+                                <input type="text" name="country" class="form-control"
+                                    placeholder="Enter Country" required>
                             </div>
                             <div class="col-md-3 mb-3">
                                 <label class="form-label" for="">Email</label>
@@ -50,7 +50,7 @@
                             </div>
 
                             <div class="col-md-3 mb-3">
-                                <label for="issue_date" class="form-label">Gender</label>
+                                <label for="" class="form-label">Gender</label>
                                 <select class="form-select js-example-basic-single" name="gender" id="">
                                     <option value="">Select </option>
                                     <option value="male">Male</option>
@@ -110,7 +110,7 @@
                             <div class="col-md-3 mb-3">
                                 <div class="mb-3">
                                     <label class="form-label">Your CV</label>
-                                    <input name="cv" class="form-control" type="file" accept="'application/pdf">
+                                    <input name="cv" class="form-control" type="file" accept="application/pdf">
                                 </div>
                             </div>
 
@@ -131,9 +131,7 @@
                             </div>
 
                             <div class="col-md-6 mb-3">
-
                                 <label for="issue_date" class="form-label">Present Address</label>
-
                                 <textarea class="form-control" name="present_address" rows="3" placeholder="Enter Present Address"></textarea>
 
                             </div>
@@ -141,6 +139,7 @@
                             <div class="col-md-6 mb-3">
                                 <label for="issue_date" class="form-label">Permanent Address</label>
                                 <textarea class="form-control" name="parmanent_address" rows="3" placeholder="Enter Permanent Address"></textarea>
+
                             </div>
 
                             <div class="col-md-6 mb-3">

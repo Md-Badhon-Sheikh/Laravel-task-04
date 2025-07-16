@@ -52,7 +52,7 @@
                             <a href="{{ route('admin.learner.add') }}" class="nav-link">Learner Add</a>
                         </li>
                         <li class="nav-item">
-                            <a href="" class="nav-link">Learner List</a>
+                            <a href="{{route('admin.learner.list')}}" class="nav-link">Learner List</a>
                         </li>
                     </ul>
                 </div>

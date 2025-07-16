@@ -46,6 +46,11 @@ Route::prefix('admin')->group(function () {
             Route::match(['get', 'post'], 'link/add', [ImportantLinkController::class, 'important_link_add'])->name('link.add');
 
            Route::match(['get','post'], 'learner/add', [LearnerController::class, 'learner_add'])->name('learner.add');
+
+           Route::get('learner/list', [LearnerController::class, 'learner_list'])->name('learner.list');
+
+           Route::get('/learner/pdf', [LearnerController::class, 'downloadPdf'])->name('learner.pdf');
+
           
         });
     });
