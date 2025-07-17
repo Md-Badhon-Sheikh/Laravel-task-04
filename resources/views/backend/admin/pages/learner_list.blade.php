@@ -19,7 +19,7 @@
                         <div id="success"></div>
                         <div id="failed"></div>
                     </div>
-                    <div style="text-align: right" class="mt-3">
+                    <div style="text-align: right" class="mb-3">
 
                         <a href=""><button type="button" class="btn btn-warning btn-xs"><i class="fa-solid fa-download"></i> Excel</button></a>
                         <a href="{{route('admin.learner.pdf')}}" target="_blank"><button type="button" class="btn btn-danger btn-xs"><i class="fa-regular fa-file-pdf"></i>PDF</button></a>
@@ -27,6 +27,7 @@
                     </div>
                     <div class="table-responsive" id="print_data">
                         <table id="dataTableExample" class="table" style="width: 100%;">
+                               
                             <thead>
                                 <tr>
                                     <th style="">SL</th>

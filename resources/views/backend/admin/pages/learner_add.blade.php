@@ -110,7 +110,7 @@
                             <div class="col-md-3 mb-3">
                                 <div class="mb-3">
                                     <label class="form-label">Your CV</label>
-                                    <input name="cv" class="form-control" type="file" accept="application/pdf">
+                                    <input name="latest_cv" class="form-control" type="file" accept="application/pdf">
                                 </div>
                             </div>
 

@@ -45,8 +45,8 @@
                             </div>
 
                             <div class="col-md-3 mb-3">
-                                <label class="form-label" for="">Password *</label>
-                                <input type="password" class="form-control" placeholder="Enter Password" name="password" required>
+                                <label class="form-label" for="">Password </label>
+                                <input type="password" class="form-control" placeholder="Enter Password" name="password" >
                             </div>
 
                             <div class="col-md-3 mb-3">
@@ -102,7 +102,7 @@
                                 </div>
                                 <div class="text-center">
                                     <img id="imgPreviewId" onclick="image_upload()"
-                                        src="{{ asset($data['learner']->photo ? $data['learner']->photo : 'backend_assets/images/uploads_preview.png') }}">
+                                        src="{{asset($data['learner']->photo ? $data['learner']->photo : 'backend_assets/images/uploads_preview.png')}}">
                                 </div>
                             </div>
 

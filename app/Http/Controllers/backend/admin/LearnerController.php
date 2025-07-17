@@ -46,10 +46,10 @@ class LearnerController extends Controller implements HasMiddleware
             $cv_file = $request->file('cv');
             if ($cv_file) {
                 $cv_extension = $cv_file->getClientOriginalExtension();
-                $cv_name = 'backend_assets/cv/' . uniqid() . '.' . $cv_extension;
-                $cv_file->move(public_path('backend_assets/cv'), basename($cv_name));
+                $latest_cv = 'backend_assets/cv/' . uniqid() . '.' . $cv_extension;
+                $cv_file->move(public_path('backend_assets/cv'), basename($latest_cv));
             } else {
-                $cv_name = null;
+                $latest_cv = null;
             }
             try {
                 Learner::create([
@@ -65,7 +65,7 @@ class LearnerController extends Controller implements HasMiddleware
                     'company_name' => $request->company_name,
                     'experience_year' => $request->experience_year,
                     'photo' =>  $photo_name,
-                    'latest_cv' => $cv_name,
+                    'latest_cv' => $latest_cv,
                     'training_details' => $request->training_details,
                     'achievements' => $request->achievements,
                     'research_paper' => $request->research_paper,
@@ -113,7 +113,7 @@ class LearnerController extends Controller implements HasMiddleware
             $photo = $request->file('photo');
             if ($photo) {
                 $photo_extension = $photo->getClientOriginalExtension();
-                $photo_name = 'backend_assets/images/learner' . uniqid() . '.' . $photo_extension;
+                $photo_name = 'backend_assets/images/learner/' . uniqid() . '.' . $photo_extension;
 
                 $photo->move(public_path('backend_assets/images/learner'), basename($photo_name));
 
@@ -125,100 +125,100 @@ class LearnerController extends Controller implements HasMiddleware
             }
             if ($request->name) {
                 $name = bcrypt($request->name);
-            }else{
+            } else {
                 $name = $data['learner']->name;
             }
             if ($request->phone) {
                 $phone = bcrypt($request->phone);
-            }else{
+            } else {
                 $phone = $data['learner']->phone;
             }
             if ($request->country) {
                 $country = bcrypt($request->country);
-            }else{
+            } else {
                 $country = $data['learner']->country;
             }
             if ($request->email) {
                 $email = bcrypt($request->email);
-            }else{
+            } else {
                 $email = $data['learner']->email;
             }
             if ($request->password) {
                 $password = bcrypt($request->password);
-            }else{
+            } else {
                 $password = $data['learner']->password;
             }
             if ($request->gender) {
                 $gender = bcrypt($request->gender);
-            }else{
+            } else {
                 $gender = $data['learner']->gender;
             }
             if ($request->learner_type) {
                 $learner_type = bcrypt($request->learner_type);
-            }else{
+            } else {
                 $learner_type = $data['learner']->learner_type;
             }
             if ($request->highest_degree) {
                 $highest_degree = bcrypt($request->highest_degree);
-            }else{
+            } else {
                 $highest_degree = $data['learner']->highest_degree;
             }
             if ($request->position) {
                 $position = bcrypt($request->position);
-            }else{
+            } else {
                 $position = $data['learner']->position;
             }
             if ($request->company_name) {
                 $company_name = bcrypt($request->company_name);
-            }else{
+            } else {
                 $company_name = $data['learner']->company_name;
             }
             if ($request->experience_year) {
                 $experience_year = bcrypt($request->experience_year);
-            }else{
+            } else {
                 $experience_year = $data['learner']->experience_year;
             }
             if ($request->latest_cv) {
-                $cv_name = bcrypt($request->latest_cv);
-            }else{
-                $cv_name = $data['learner']->latest_cv;
+                $latest_cv = bcrypt($request->latest_cv);
+            } else {
+                $latest_cv = $data['learner']->latest_cv;
             }
             if ($request->training_details) {
                 $training_details = bcrypt($request->training_details);
-            }else{
+            } else {
                 $training_details = $data['learner']->training_details;
             }
             if ($request->achievements) {
                 $achievements = bcrypt($request->achievements);
-            }else{
+            } else {
                 $achievements = $data['learner']->achievements;
             }
             if ($request->research_paper) {
                 $research_paper = bcrypt($request->research_paper);
-            }else{
+            } else {
                 $research_paper = $data['learner']->research_paper;
             }
             if ($request->present_address) {
                 $present_address = bcrypt($request->present_address);
-            }else{
+            } else {
                 $present_address = $data['learner']->present_address;
             }
             if ($request->parmanent_address) {
                 $parmanent_address = bcrypt($request->parmanent_address);
-            }else{
+            } else {
                 $parmanent_address = $data['learner']->parmanent_address;
             }
             if ($request->country_visited) {
                 $country_visited = bcrypt($request->country_visited);
-            }else{
+            } else {
                 $country_visited = $data['learner']->country_visited;
             }
             if ($request->bio) {
                 $bio = bcrypt($request->bio);
-            }else{
+            } else {
                 $bio = $data['learner']->bio;
             }
-            try{
+            try {
                 $data['learner']->update([
                     'name' => $request->name,
                     'phone' => $request->phone,
@@ -232,7 +232,7 @@ class LearnerController extends Controller implements HasMiddleware
                     'company_name' => $request->company_name,
                     'experience_year' => $request->experience_year,
                     'photo' =>  $photo_name,
-                    'latest_cv' => $cv_name,
+                    'latest_cv' => $latest_cv,
                     'training_details' => $request->training_details,
                     'achievements' => $request->achievements,
                     'research_paper' => $request->research_paper,
@@ -241,8 +241,8 @@ class LearnerController extends Controller implements HasMiddleware
                     'country_visited' => $request->country_visited,
                     'bio' => $request->bio,
                 ]);
-                return back()->with('success','Updated Successfully');
-            }catch(PDOException $e){
+                return back()->with('success', 'Updated Successfully');
+            } catch (PDOException $e) {
                 return back()->with('error', 'Failed Please try Again');
             }
         }
@@ -251,17 +251,18 @@ class LearnerController extends Controller implements HasMiddleware
         return view('backend.admin.pages.learner_edit', compact('data'));
     }
 
-    public function learner_delete($id){
+    public function learner_delete($id)
+    {
         $server_response = ['status' => 'FAILED', 'message' => 'Not Found'];
         $learner = Learner::findOrFail($id);
-        if($learner){
-            if(File::exists($learner->photo)){
+        if ($learner) {
+            if (File::exists($learner->photo)) {
                 File::delete($learner->photo);
             }
             $learner->delete();
-            $server_response=['status'=> 'SUCCESS', 'message' => 'Deleted Successfully'];
-        } else{
-            $server_response = ['status' => 'FAILED', 'message'=>'Not Found'];
+            $server_response = ['status' => 'SUCCESS', 'message' => 'Deleted Successfully'];
+        } else {
+            $server_response = ['status' => 'FAILED', 'message' => 'Not Found'];
         }
         echo json_encode($server_response);
     }
