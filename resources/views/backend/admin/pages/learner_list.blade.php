@@ -70,7 +70,7 @@
 
 
                                     <td>
-                                        <a href=""
+                                        <a href="{{route('admin.learner.edit', $single_learner->id)}}"
                                             class="btn btn-success btn-icon" href=""><i
                                                 class="fa-solid fa-edit"></i></a>
 
