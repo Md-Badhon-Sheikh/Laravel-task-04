@@ -250,4 +250,19 @@ class LearnerController extends Controller implements HasMiddleware
         $data['page_title'] = 'Learner Edit';
         return view('backend.admin.pages.learner_edit', compact('data'));
     }
+
+    public function learner_delete($id){
+        $server_response = ['status' => 'FAILED', 'message' => 'Not Found'];
+        $learner = Learner::findOrFail($id);
+        if($learner){
+            if(File::exists($learner->photo)){
+                File::delete($learner->photo);
+            }
+            $learner->delete();
+            $server_response=['status'=> 'SUCCESS', 'message' => 'Deleted Successfully'];
+        } else{
+            $server_response = ['status' => 'FAILED', 'message'=>'Not Found'];
+        }
+        echo json_encode($server_response);
+    }
 }

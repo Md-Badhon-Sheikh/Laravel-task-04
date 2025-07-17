@@ -96,7 +96,7 @@
             let id = $(this).attr('data-delete');
             let row = $(this).closest('tr');
             $.ajax({
-                url: '/admin/link/delete/' + id,
+                url: '/admin/learner/delete/' + id,
                 success: function(data) {
                     var data_object = JSON.parse(data);
                     if (data_object.status == 'SUCCESS') {
