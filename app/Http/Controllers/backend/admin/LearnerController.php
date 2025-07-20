@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\backend\admin;
 
+use App\Exports\LearnersExport;
 use App\Http\Controllers\Controller;
 use App\Http\Middleware\AdminAuthenticationMiddleware;
 use App\Http\Middleware\BackendAuthenticationMiddleware;
@@ -14,6 +15,7 @@ use PDOException;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
+use Maatwebsite\Excel\Facades\Excel;
 
 class LearnerController extends Controller implements HasMiddleware
 {
@@ -43,7 +45,7 @@ class LearnerController extends Controller implements HasMiddleware
             }
 
             // cv upload
-            $cv_file = $request->file('cv');
+            $cv_file = $request->file('latest_cv');
             if ($cv_file) {
                 $cv_extension = $cv_file->getClientOriginalExtension();
                 $latest_cv = 'backend_assets/cv/' . uniqid() . '.' . $cv_extension;
@@ -95,11 +97,19 @@ class LearnerController extends Controller implements HasMiddleware
         return view('backend.admin.pages.learner_list', compact('data'));
     }
 
+    // pdf Download 
     public function downloadPdf()
     {
         $data['learner_list'] = DB::table('learners')->get();
         $pdf = Pdf::loadView('backend.admin.pages.learner_pdf', compact('data'))->setPaper('legal', 'landscape');
         return $pdf->download('learner.pdf');
+    }
+
+    // excel download 
+
+    public function exportLearners(){
+        //  $data['learner_list'] = DB::table('learners')->get();
+          return Excel::download(new LearnersExport, 'learners.xlsx');
     }
 
     // edit function 
@@ -123,6 +133,23 @@ class LearnerController extends Controller implements HasMiddleware
             } else {
                 $photo_name = $old_photo;
             }
+
+            // cv edit 
+            $old_cv = $data['learner']->latest_cv;
+            $cv_file = $request->file('latest_cv');
+            if ($cv_file) {
+                $cv_extension = $cv_file->getClientOriginalExtension();
+                $latest_cv = 'backend_assets/cv/' . uniqid() . '.' . $cv_extension;
+                $cv_file->move(public_path('backend_assets/cv'), basename($latest_cv));
+
+               
+                if (File::exists($old_cv)) {
+                    File::delete($old_cv);
+                }
+            } else {
+                $latest_cv = $old_cv;
+            }
+
             if ($request->name) {
                 $name = bcrypt($request->name);
             } else {
@@ -178,11 +205,7 @@ class LearnerController extends Controller implements HasMiddleware
             } else {
                 $experience_year = $data['learner']->experience_year;
             }
-            if ($request->latest_cv) {
-                $latest_cv = bcrypt($request->latest_cv);
-            } else {
-                $latest_cv = $data['learner']->latest_cv;
-            }
+
             if ($request->training_details) {
                 $training_details = bcrypt($request->training_details);
             } else {
@@ -251,6 +274,8 @@ class LearnerController extends Controller implements HasMiddleware
         return view('backend.admin.pages.learner_edit', compact('data'));
     }
 
+
+    // delete function 
     public function learner_delete($id)
     {
         $server_response = ['status' => 'FAILED', 'message' => 'Not Found'];

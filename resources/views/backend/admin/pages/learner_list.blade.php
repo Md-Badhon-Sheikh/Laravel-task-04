@@ -21,7 +21,7 @@
                     </div>
                     <div style="text-align: right" class="mb-3">
 
-                        <a href=""><button type="button" class="btn btn-warning btn-xs"><i class="fa-solid fa-download"></i> Excel</button></a>
+                        <a href="{{route('admin.learners.export')}}"><button type="button" class="btn btn-warning btn-xs"><i class="fa-solid fa-download"></i> Excel</button></a>
                         <a href="{{route('admin.learner.pdf')}}" target="_blank"><button type="button" class="btn btn-danger btn-xs"><i class="fa-regular fa-file-pdf"></i>PDF</button></a>
 
                     </div>

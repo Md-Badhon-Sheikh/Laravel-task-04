@@ -54,6 +54,9 @@ Route::prefix('admin')->group(function () {
             Route::match(['get', 'post'], 'learner/edit/{id}', [LearnerController::class, 'learner_edit'])->name('learner.edit');
 
             Route::get('learner/delete/{id}', [LearnerController::class, 'learner_delete'])->name('learner.delete');
+
+            Route::get('learners/export', [LearnerController::class, 'exportLearners'])->name('learners.export');
+
         });
     });
 });

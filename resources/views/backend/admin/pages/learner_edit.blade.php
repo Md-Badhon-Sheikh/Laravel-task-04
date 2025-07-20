@@ -111,11 +111,11 @@
                                 <label class="form-label">Your CV</label>
                                 <input name="cv" class="form-control" type="file" accept="application/pdf">
 
-                                @if (!empty($data['learner']->latest_cv))
-                                <a href="{{ asset($data['learner']->latest_cv) }}" target="_blank" class="btn btn-sm btn-outline-primary mt-2">
+                               
+                                <a href="{{ asset($data['learner']->latest_cv ? $data['learner']->latest_cv : 'N/A ') }}" target="_blank" class="btn btn-sm btn-outline-primary mt-2">
                                     <i class="fa fa-file-pdf"></i> View Existing CV
                                 </a>
-                                @endif
+                               
                             </div>
 
 
